@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<!-- 视频 https://www.bilibili.com/video/BV15741177Eh?p=21 -->
+<div id="app">
+  <!--
+    需求: 实现firstName lastName展示(中间有个空格)
+    问题: 下面写法太复杂
+  -->
+  <h2>{{firstName+' '+lastName}}</h2>
+  <h2>{{firstName}} {{lastName}}</h2>
+  <!-- 
+    优化1:把拼接封装在methods方法
+    缺点:不直观,要看方法
+    methods中方法调用一般要加() 方法名()
+   -->
+  <h2>{{getFullName()}}</h2>
+  <!-- 
+    优化2:计算属性
+    计算属性的方法直接当成属性使用 调用不用加()
+  -->
+  <h2>{{fullName}}</h2>
+</div>    
+<script src="../js/vue.js"></script>    
+<script>
+    const app =new Vue({
+        el:"#app",
+        data:{
+            firstName:'Lebron',
+            lastName:'James'
+        },
+        // 计算属性
+        computed: {
+          // 这里的方法名一般为 名词
+          // 这里的方法调用不用加() 直接写方法名
+          fullName(){
+            return this.firstName+' '+this.lastName
+          }
+        },
+        methods: {
+          // 这里的方法名一般 为 动词+名词 
+          // 这里的方法调用一般要加() 方法名()
+          getFullName(){
+            return this.firstName+' '+this.lastName
+          }
+        }
+
+    })
+</script>
+</body>
+</html>

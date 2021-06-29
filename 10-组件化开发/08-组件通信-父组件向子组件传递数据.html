@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+    <!-- 
+      在子组件中使用父组件数据
+      v-bind:子组件自定义数据字段="父组件数据字段" 
+      语法糖  :子组件自定义数据字段="父组件数据字段"
+    -->
+    <cpn v-bind:cmovies="movies" :cmessage="message"></cpn> 
+
+  </div>
+  
+  <!-- cpn组件模板 -->
+  <template id="cpn">
+    <!-- 在子组件模板中使用父组件数据  用子组件自定义数据字段 -->
+    <div>
+      <ul>
+        <li v-for="item in cmovies">{{item}}</li>
+      </ul>
+      <p>{{cmessage}}</p>
+    </div>
+  </template>
+<script src="../js/vue.js"></script>    
+<script>
+
+    // 组件构造器
+    const cpn ={
+      template:'#cpn',    
+      // 在子组件中使用父组件数据 props  父传子
+      
+      /*
+        数组类型 
+        元素是自定义子组件数据字段  
+        该字段在使用组件时 和父组件的字段进行绑定  v-bind:子组件自定义数据字段="父组件数据字段" 
+        在组件模板中用这个字段调用父组件的数据  <p>{{cmessage}}</p>
+      */
+      // props: ['cmovies','cmessage'] 
+
+      /*
+        对象类型
+
+        {
+          自定义组件数据字段:字段指定数据类型
+        }
+
+        或者
+
+        {
+          自定义组件数据字段:{
+            type:字段指定数据类型,
+            default:字段默认值, 父组件没有向子组件中传递cmessage数据时，组件模板中会使用cmessage的默认值
+                数据类型是对象或者数组时，默认值必须是一个函数 在函数中return []/{}
+                default(){
+                  return []
+                }
+            required:bool,  父组件是否必须向该数据字段传值
+            // 数据字段自定义验证方法 value为父组件向子组件传递的数据
+            validator(value){
+              
+            }
+
+          }
+        }
+      */
+      
+      props: {
+        // cmovies:Array,
+        cmessage:{
+          type:String, // 可以指定多种数据类型 [String,Number,Object]  也可以自定义类型
+          default:'aaa',
+          required:true,
+          // 自定义验证方法
+          validator(value){
+            // 这个值必须匹配下列字符串中的一个
+            return ['success','warning','danger'].indexOf(value)!==-1     
+          }
+        },
+        cmovies:{
+          type:Array ,
+          // 数据类型是对象或者数组时，默认值必须是一个函数 在函数中return []/{}
+          default(){
+            return []
+          },
+          
+        }
+      }
+        
+    }
+
+    // vue 实例 是 最顶层组件(root组件) 最顶层的父组件
+    const app =new Vue({
+        el:"#app",
+        data:{
+            message:'warning',
+            movies:['海王','海贼王','海尔兄弟'] // 数据不能直接在子组件中使用
+        },
+        components: { // 在Vue实例中注册组件cpn 在Vue实例绑定的html标签内可用 cpn相当于Vue实例的子组件
+          cpn // 对象字面量 属性增强写法  等同于 cpn:cpn 
+          
+        }
+
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<!-- 视频 https://www.bilibili.com/video/BV15741177Eh?p=24 -->
+<div id="app">
+    <h2>{{fullName}}</h2>
+    <h2>{{fullName1}}</h2>
+    <h2>{{fullName2}}</h2>
+    <h2>{{fullName3}}</h2>
+</div>    
+<script src="../js/vue.js"></script>    
+<script>
+    const app =new Vue({
+        el:"#app",
+        data:{
+            firstName:'kobe',
+            lastName:'Bryant'
+        },
+        computed:{
+          // 计算属性方法 这种其实是计算属性的简写
+          fullName:function(){
+            return this.firstName+' '+this.lastName
+          },
+          // 计算属性 完整写法
+          // 属性名
+          fullName1:{ // 属性名:对象
+            // 对象里有set和get方法 fullName1属性值由get方法返回值决定
+            // 如果直接给fullName1赋值(app.fullName1='xiao zhang') 会自动调用set方法
+            set:function(newValue){  // 参数用于接收 给 fullName1赋的值 ('xiao zhang')
+              console.log(newValue)
+              // 可以在这里对newValue进行处理 然后通过get方法返回
+              // 因为get方法中是对firstName和lastName拼接返回
+              const names =newValue.split(' '); // 把newValue通过空格切成数组
+              this.firstName=names[0]
+              this.lastName=names[1]
+            },
+            // fullName1属性值由get方法返回值决定
+            get:function(){
+              // return 'abc'
+              return this.firstName+' '+this.lastName
+            }
+
+          },
+          // 计算属性 一般不用set方法,简写如下
+          fullName2:{
+            // 计算属性一般不用set方法,如果没有set方法是只读属性
+            get:function(){
+              return this.firstName+' '+this.lastName
+            }
+          },
+
+          // 计算属性 进一步简写如下 
+          fullName3:function(){
+            return this.firstName+' '+this.lastName
+          }
+
+        }
+
+    })
+
+    // 给计算属性 fullName1赋值
+    app.fullName1='xiao zhang'
+</script>
+</body>
+</html>

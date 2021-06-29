@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+    
+
+  <script src="ming.js"></script>  <!-- ming.js 中 小明定义一个变量 名称是flag 并且为true -->
+  <script src="hong.js"></script>  <!-- hong.js 中 小红定义一个变量 名称是flag 并且为false -->
+  <script src="main.js"></script>  
+  <!-- 
+    在main.js文件中，小明想通过flag 进行一些判断，完成后续的事情 
+    问题:实际上 flag 已经在hong.js 被小红重新定义了，不会实现小明的业务了
+  -->
+
+  <!-- 可以通过闭包实现模块化解决上面问题  -->
+</body>
+</html>

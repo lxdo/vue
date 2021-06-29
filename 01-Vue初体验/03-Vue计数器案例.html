@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03-Vue计数器案例</title>
+</head>
+<body>
+    <div id="app">
+        <h2>当前计数:{{counter}}</h2>
+        <!--vue 给页面元素绑定事件  v-on:click 给button绑定点击事件 -->
+        <!-- 给button绑定点击事件  counter++ 直接写出事件内容-->
+        <!-- <button v-on:click='counter++'>+</button>  -->
+        <!-- <button v-on:click='counter--'>-</button> -->
+        <!-- v-on:事件='事件触发方法' -->
+        <button v-on:click="add">+</button> 
+        <!-- @click 是 v-on:click 语法糖(简写)  -->
+        <button @click="sub">-</button>
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script>
+        const app = new Vue({
+            // 决定vue实例会管理哪一个DOM
+            el:'#app',
+            // Vue实例对应的数据对象
+            data:{
+                counter:0
+            },
+            // 定义vue实例的一些方法 
+            methods:{ // 给vue对象挂载的页面元素绑定方法事件
+                add:function(){
+                    console.log('add 被执行');
+                     // this 为 app实例
+                    this.counter++ // 指向 app实例里的counter变量
+                },
+                sub:function(){
+                    console.log('sub 被执行');
+                    this.counter--
+                },
+            },
+            // 生命周期函数 也称钩子方法(vue实例生命周期某个瞬间被触发)
+        
+            beforeCreate:function(){ // 在Vue实例生命周期某个瞬间被执行 实例创建前触发调用
+
+            },
+            created:function(){ // 在Vue实例生命周期某个瞬间被执行 实例被创建后触发调用
+                // 一般在这里做一些网络请求
+                console.log('created');
+              
+            },
+            mounted:function(){ // 在Vue实例生命周期某个瞬间被执行
+                console.log('mounted');
+            }
+
+            
+        })
+
+        /*
+            方法和函数的区别:
+                方法: 在类中的函数叫方法
+                函数: 不在类中的函数
+
+            生命周期:事物从诞生到消亡的整个过程
+
+            MVVVM: model (数据层) VM (viewmodel vue实例层)  view (html视图层)
+        */
+    </script>
+</body>
+</html>

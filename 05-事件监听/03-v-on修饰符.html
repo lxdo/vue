@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<div id="app">
+  <!--  1.修饰符 .stop 的使用  阻止冒泡 -->
+  <!-- 这种情况下点击 按钮 两个事件都会被执行 事件冒泡 -->
+  <div @click="divClick">
+    aaa
+    <button @click="btnClick">按钮</button>
+  </div>
+  <!-- 
+    这种情况下点击 按钮 只会执行按钮的事件 阻止冒泡 
+  -->
+  <div @click="divClick">
+    aaa
+    <button @click.stop="btnClick">按钮</button>
+  </div>
+
+  <br>
+  <!--  2.修饰符 .prevent 的使用 阻止默认事件 -->
+  <!-- 这种情况下点击 提交 默认提交表单内容 -->
+  <form action="baidu">
+    <input type="text" name="" id="">
+    <input type="submit" value="提交">
+  </form>
+
+  <!-- 如果不想默认提交 想通过点击事件处理提交 可以用.prevent 阻止默认事件 -->
+  <br>
+  <form action="baidu">
+    <input type="text" name="" id="">
+    <input type="submit" value="提交" @click.prevent="submitClick">
+  </form>
+
+  <!-- 3.修饰符 @keyup.键帽 的使用  监听特定键帽弹起事件 -->
+
+  <!-- 这种情况下按下键盘键帽弹起都会触发keyup事件 调用keyUp方法 -->
+  <input type="text" @keyup="keyUp">        <!-- keyup 按下键盘键帽弹起时触发事件-->
+
+  <br>
+  <!-- 这种情况下按下键盘 指定键帽弹起 才会触发keyup事件 调用keyUp方法-->
+  <!-- enter键帽弹起才会触发keyup事件 调用keyUp方法-->
+  <input type="text" @keyup.enter="keyUp"> 
+
+  <br>
+  <!-- 4.修饰符 .once 的使用 只触发一次事件 -->
+  <!-- 这种情况下 每次点击按钮都会触发点击事件 调用btn2Click 方法-->
+  <button @click="btn2Click">按钮</button>
+  <!-- 这种情况下 第一次点击按钮会触发点击事件 再次点击不会触发 -->
+  <button @click.once="btn2Click">按钮</button>
+
+  <!-- 串联修饰符 多个修饰符一起使用 -->
+    <button @click.stop.prevent="btnClick">按钮</button>
+
+</div>    
+<script src="../js/vue.js"></script>    
+<script>
+    const app =new Vue({
+        el:"#app",
+        data:{
+            message:"hello"
+        },
+        methods: {
+          divClick(){
+            console.log('divClick')
+          },
+          btnClick(){
+            console.log('btnClick')
+          },
+          submitClick(){
+            console.log('submitClick')
+          },
+          keyUp(){
+            console.log('keyUp')
+          },
+          btn2Click(){
+            console.log('btn2Click')
+          }
+        }
+
+    })
+</script>
+</body>
+</html>

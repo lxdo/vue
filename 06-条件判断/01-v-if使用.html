@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<div id="app">
+    <h2>{{message}}</h2>
+    <!-- v-if条件判断 来决定元素是否显示 -->
+
+    <!-- 条件为true显示 -->
+    <h2 v-if="Show">{{message}}</h2>
+    <!-- 条件为false不显示-->
+    <h2 v-if="NoShow">{{message}}</h2>
+</div>    
+<script src="../js/vue.js"></script>    
+<script>
+    const app =new Vue({
+        el:"#app",
+        data:{
+            message:"hello",
+            Show:true,
+            NoShow:false
+        },
+
+    })
+</script>
+</body>
+</html>

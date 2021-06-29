@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+    <!--
+      需求:采用 ul li 形式默认展示组件cpn中pLanguages字段  (默认方式)
+      分析:在cpn组件模板中可以使用cpn中pLanguages字段
+    -->
+    <cpn></cpn>
+    <!--
+
+      需要:采用 - 形式 展示子组件cpn中pLanguages字段  (特殊需求)
+      分析:
+        1.cpn组件模板预留了插槽 ，可以在使用组件时自定义内容对cpn中pLanguages字段处理展示
+
+        2.默认情况下 使用cpn组件时 组件标签中使用的字段 是取 父级组件的字段  这里父级是Vue实例
+         所以不能直接取cpn组件的pLanguages字段
+
+        3.可以通过如下方法 让下面使用组件cpn时 拿到cpnpLanguages字段
+          3.1 在cpn组件模板插槽 定义自定义属性 :自定义属性名="cpn字段"
+          3.2 在使用组件时 在组件标签中自定义内容
+            固定格式:
+            <template slot-scope="slot">
+              xxxx  这里的标签中使用  slot.自定义属性名  (等同于使用cpn字段)
+            </template>
+
+      思想:父组件替换插槽的标签 但是内容由子组件来提供
+
+    -->
+    <cpn>
+      <!-- 使用组件时 自定义内容中使用cpn组件字段 -->
+      <template slot-scope="slot"> <!-- 固定写法 -->
+        <span v-for="(item,index) in slot.data">{{item}}-</span>  <!-- slot.data = cpn中pLanguages-->
+      </template>
+    </cpn>
+
+    <cpn>
+      <!-- 使用组件时 自定义内容中使用cpn组件字段 -->
+      <template slot-scope="slot"> <!-- 固定写法 -->
+        <span>{{slot.data.join(' - ')}}</span>  <!-- slot.data = cpn中pLanguages-->
+      </template>
+    </cpn>
+  </div>
+
+  <template id="cpn">
+    <div>
+      <!--
+        :data="pLanguages"
+        在插槽标签中自定义属性名  :属性名="字段" 用于在父组件中访问子组件的字段
+      -->
+      <slot :data="pLanguages">
+        <!-- 插槽中的内容是默认内容 当使用组件时没有写内容 展示默认内容-->
+        <ul>
+          <!-- 组件模板中 标签中使用的字段 是取该组件的字段 -->
+          <li v-for="(item,index) in pLanguages">{{item}}</li>
+        </ul>
+    </slot>
+    </div>
+  </template>
+<script src="../js/vue.js"></script>
+<script>
+    const app =new Vue({
+        el:"#app",
+        data:{
+            message:"hello"
+        },
+        components: {
+          cpn:{
+            template:'#cpn',
+            data(){
+              return {
+                pLanguages:['JavaScript','C++','Java','C#','Python','Go']
+              }
+            }
+          }
+        }
+
+    })
+    /*
+
+     */
+</script>
+</body>
+</html>

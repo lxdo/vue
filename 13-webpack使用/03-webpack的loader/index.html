@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+
+  <!--
+    loader使用:
+      1.通过npm安装需要使用的loader
+        常用loader https://www.webpackjs.com/loaders/ 可以根据不同文件类型选择不同loader
+         css -> style-loader和css-loader
+          less -> less-loader
+          文件(图片) -> url-loader  (文件小于url-loader配置的limit使用这个)
+                       file-loader (文件大于url-loader配置的limit使用这个)
+          ES6转ES5   babel-loader
+           npm install --save-dev babel-loader@7 (@7是指定版本号) babel-core (必须) babel-preset-es2015 (es2015就是ES6)
+
+
+      2.在webpack.config.js中的module关键字下进行配置
+        使用教程:
+        css https://www.webpackjs.com/loaders/css-loader/  https://www.webpackjs.com/loaders/style-loader/
+        less https://www.webpackjs.com/loaders/less-loader/
+        文件(图片)  https://www.webpackjs.com/loaders/url-loader/
+                  https://www.webpackjs.com/loaders/file-loader/
+        ES6转ES5    https://www.webpackjs.com/loaders/babel-loader/
+      3.在js入口程序加载依赖的文件
+        css  require('./css/normal.css')
+        less require('./css/special.less')
+      4.执行 npm run build
+   -->
+  <script src="./dist/bundle.js"></script>
+
+  <h2>hello</h2>
+
+</body>
+</html>

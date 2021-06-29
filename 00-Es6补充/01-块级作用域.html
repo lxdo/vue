@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+<!--
+  视频 https://www.bilibili.com/video/BV15741177Eh?p=26
+      https://www.bilibili.com/video/BV15741177Eh?p=27
+-->  
+<button>按钮1</button> 
+<button>按钮2</button>  
+<button>按钮3</button>   
+<button>按钮4</button>  
+<button>按钮5</button>  
+<script>
+  // 1.变量作用域:变量在什么范围内是可用
+  // 2.块级作用域:
+
+  // var 定义的变量 没有块级作用域
+  // 在一个代码块中用var定义变量name 
+  {
+    var name ='jack'
+    console.log(name) // jack  name 在代码块内可用使用
+  }
+  // name在代码块外也可以使用 所以说var 定义变量没有块级作用域
+  console.log(name) // jack
+
+  // 没有块级作用域引起的问题
+  var btns=document.getElementsByTagName('button')
+
+  for(var i=0;i<btns.length;i++){ 
+    btns[i].addEventListener('click',function(){
+      console.log('第'+i+'个按钮被点击') // js加载完成for循环就完成了 i也变成了5 
+    })
+  }
+
+  /*
+    因为var 定义变量没有块级作用域 for代码块内几次循环共用i的值 i最后变成了5 
+    上面代码其实产生了5个
+     btnss[5].addEventListener('click',function(){ 
+      console.log('第'+5+'个按钮被点击')
+    })
+    btnss[5].addEventListener('click',function(){ 
+      console.log('第'+5+'个按钮被点击')
+    })
+    btnss[5].addEventListener('click',function(){ 
+      console.log('第'+5+'个按钮被点击')
+    })
+    btnss[5].addEventListener('click',function(){ 
+      console.log('第'+5+'个按钮被点击')
+    })
+    btnss[5].addEventListener('click',function(){ 
+      console.log('第'+5+'个按钮被点击')
+
+   */
+  // 结果:无论点击哪个按钮 console结果都是 第5个按钮被点击
+  // 原因:var 定义变量没有块级作用域 页面打开,js加载完成,5次循环后i变成了5 点击时i已经是5
+  // 通过闭包 解决上面问题 因为函数有作用域  i作为参数传入闭包函数 外面i改变 不会影响闭包内i的值 函数使用变量是就近原则 有参数必然用参数的值
+  for(var i=0;i<btns.length;i++){ // js加载完成 for循环完成 其实产生了5个下面的闭包函数  i的值分别为0,1,2,3,4
+    (function(i){ // i给入闭包函数 外面i改变 不会影响闭包内i的值
+      btns[i].addEventListener('click',function(){
+      console.log('第'+i+'个按钮被点击')
+    })
+    })(i)  
+  }
+  // Es5之前因为if和for代码块都没有块级作用域的概念，所以在很多时候，都要用function的作用域来解决应用外面变量的问题
+
+  // ES6加入了let,let是有if和for的块级作用域
+  // 上面用ES6写
+  const btnss=document.getElementsByTagName('button')
+  for(let i=0;i<btnss.length;i++){ // 用let定义变量 在for代码块有块级作用域 i在代码块当前循环内不会改变
+    btnss[i].addEventListener('click',function(){ 
+      console.log('第'+i+'个按钮被点击')
+    })
+  }
+
+  /*
+    上面代码其实产生了5个
+    btnss[0].addEventListener('click',function(){ 
+      console.log('第'+0+'个按钮被点击')
+    })
+    btnss[1].addEventListener('click',function(){ 
+      console.log('第'+1+'个按钮被点击')
+    })
+    btnss[2].addEventListener('click',function(){ 
+      console.log('第'+2+'个按钮被点击')
+    })
+    btnss[3].addEventListener('click',function(){ 
+      console.log('第'+3+'个按钮被点击')
+    })
+    btnss[4].addEventListener('click',function(){ 
+      console.log('第'+4+'个按钮被点击')
+    })
+  */
+
+</script>  
+</body>
+</html>

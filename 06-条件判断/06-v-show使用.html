@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<!-- v-show 决定一个元素是否显示 -->
+<div id="app">
+  <!-- 
+    当isShow为true时 v-if和v-show没有区别
+    当isShow为false时 
+      1.有v-if指令的标签元素，根本就不会存在dom中，不会渲染出来 
+      true时创建标签元素 false时直接删掉标签元素
+
+      2.有v-show指令的标签元素，一直都存在dom中，渲染出来
+      true时正常显示 false时是给标签元素添加一个行内样式: display:none 
+      <h2 id="v-show" style="display: none;">显示</h2>
+
+    开发中如何选择用v-if还是v-show
+    1.当需要在显示和隐藏之间切换很频繁时，使用v-show
+    2.当只有一次切换时，通常使用v-if
+
+
+  -->
+    <h2 v-if="isShow" id="v-if">{{message}}</h2>
+    <h2 v-show="isShow" id="v-show">{{message}}</h2>
+    <button @click="btnClick">{{btnMessage}}</button>
+</div>    
+<script src="../js/vue.js"></script>    
+<script>
+    const app =new Vue({
+        el:"#app",
+        data:{
+            message:"显示",
+            isShow:true,
+            btnMessage:"不显示"
+        },
+        methods: {
+          btnClick(){
+            this.isShow=!this.isShow
+            if(this.isShow){
+              this.btnMessage="不显示"
+            }else{
+              this.btnMessage="显示"
+            }
+          }
+        }
+
+    })
+</script>
+</body>
+</html>

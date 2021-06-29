@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script >
+    // 什么时候使用箭头函数  :把一个函数作为参数传到另一个函数中
+
+    // 箭头函数中的this的使用
+
+    // 普通函数
+    setTimeout(function(){
+      console.log(this)  // window对象
+    })
+    // 箭头函数
+    setTimeout(()=>{
+      console.log(this) // window对象
+    })
+    console.log(this) // window对象 这里最近作用域中的this就是window对象
+    const obj = {
+      a(){
+        // 普通函数
+        setTimeout(function (){
+          console.log(this)  // window
+        })
+        // 箭头函数
+        setTimeout(()=>{
+          console.log(this) // obj对象
+        })
+        console.log(this) // obj对象 这里最近作用域中的this就是obj对象
+      },
+    }
+    // 结论:箭头函数中的this是引用的最近作用域中的this
+    // 向外层作用域，一层层查找this 直到找到最近this的定义
+    obj.a()
+
+    const ob = {
+      a(){
+        // 普通函数
+        setTimeout(function (){
+          // 普通函数
+          setTimeout(function (){
+            console.log(this) // window对象 普通函数中的this肯定是window
+          })
+          // 箭头函数
+          setTimeout(()=>{
+            console.log(this) // window 这个箭头函数在普通函数中调用 这里最近作用域中的this就是 普通函数中的this
+          })
+        })
+        // 箭头函数
+        setTimeout(()=>{
+          // 普通函数
+          setTimeout(function (){
+            console.log(this) // window对象 普通函数中的this肯定是window
+          })
+          // 箭头函数
+          setTimeout(()=>{
+            console.log(this) // ob对象 这个箭头函数在箭头函数中调用 这里最近作用域中this就是 箭头函数中的this 也就是ob对象
+          })
+        })
+      },
+    }
+    ob.a()
+  </script>
+</body>
+</html>

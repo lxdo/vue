@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 发起两个请求 只有当两个请求都有结果才能处理页面
+    Promise.all([
+      new Promise((resolve,reject)=>{
+        // 第一个网络请求
+        setTimeout(()=>{
+          resolve('result1')
+        })
+      }),
+      new Promise((resolve,reject)=>{
+        // 第二个网络请求
+        setTimeout(()=>{
+          resolve('result2')
+        },2000)
+      })
+    ]).then(results=>{ // 两次网络请求resolve的data组成的数组
+      console.log(results);
+      results[0] // 第一个网络请求的data
+      results[1] // 第二个网络请求的data
+    })
+  </script>
+</body>
+</html>

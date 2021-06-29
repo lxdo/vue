@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <!--
+    src 开发源码目录  开发的代码在src
+      main.js  js程序入口
+    dist 打包发布目录  打包生成的代码在dist
+  -->
+
+  <!--
+    webpack安装
+    1.全局安装 npm install -g webpack
+    在终端直接执行webpack命令，使用的是全局安装的webpack
+    2.局部安装 每个项目都可以安装自己的局部webpack   保证版本一致
+     到项目目录 执行npm install webpack@x.x.x --save-dev   x.x.x webpack版本号 --save-dev 项目开发时依赖
+     到项目目录 执行node_modules/.bin/webpack 是局部命令
+
+    为什么全局安装，还需要局部安装呢
+    1.在终端直接执行webpack命令，使用的是全局安装的webpack
+    2.当在项目package.json中定义scripts时，其中包含了webpack命令，那么使用的是局部webpack
+  -->
+  <!--
+  webpack 环境下都是以模块化思想开发
+
+  用webpack打包，webpack会处理模块引用关系
+  打包命令  webpack ./src/main.js -o  ./dist/
+  把 src下main.js打包到dist下main.js webpack会自动处理引用关系
+  在下面代码中引用dist下main.js
+   -->
+  <script src="./dist/main.js"></script>
+</body>
+</html>

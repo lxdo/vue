@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // promise 另一种写法
+
+    new Promise((resolve,reject)=>{
+      // 网路请求
+      // 请求成功 获取数据
+      let data = {'name':'jack'}
+      resolve(data)
+      reject('error message')
+    }).then(data=>{ // then中传递两个函数
+      // 请求成功 对数据进行处理
+      console.log('success',data)
+    },error=>{
+      // 请求失败 对错误进行处理
+      console.log(error)
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+<!--
+ES6的模块化实现
+1.js文件引用 加上  type="module" 属性   <script src="./ming.js" type="module"></script>
+2.导出自己模块变量 export                  export {flag,sum}
+3.导入其他模块变量 import               import {flag,sum} from "./ming.js"
+-->
+
+<!-- 在引用js文件时 加上 type="module" 让每个js文件代码具有模块化(具有局部作用域) -->
+<script src="./ming.js" type="module"></script>
+<script src="./hong.js" type="module"></script>
+<script src="./main.js" type="module"></script>
+</body>
+</html>

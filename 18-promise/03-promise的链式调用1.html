@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 链式编程
+    // 实例化Promise时参数是函数
+    // 函数的参数resolve和reject也是函数
+    new Promise((resolve,reject)=>{
+      // 第一次网络请求的代码
+      setTimeout(()=>{
+        resolve()
+      },1000)
+    }).then(()=>{
+      // 第一次拿到结果的处理代码
+      console.log('hello world');
+      console.log('hello world');
+      console.log('hello world');
+      console.log('hello world');
+
+      return new Promise((resolve, reject)=>{
+        // 第二次网络请求的代码
+        setTimeout(()=>{
+          resolve()
+        },1000)
+      })
+    }).then(()=>{
+      // 第二次处理的代码
+      console.log('hello vue');
+      console.log('hello vue');
+      console.log('hello vue');
+      console.log('hello vue');
+
+      return new Promise((resolve, reject)=>{
+        // 第三次网络请求的代码
+        setTimeout(()=>{
+          resolve()
+        },1000)
+      })
+    }).then(()=>{
+      // 第三次处理的代码
+      console.log('hello python');
+      console.log('hello python');
+      console.log('hello python');
+      console.log('hello python');
+    })
+
+  </script>
+</body>
+</html>

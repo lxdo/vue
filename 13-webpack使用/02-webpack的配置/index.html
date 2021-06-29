@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+
+  <!--
+    打包方案:
+    1.在webpack.config.js配置webpack打包的入口和出口文件
+    运行 webpack 就会根据入口和出口路径自动打包生成代码
+
+    2.在package.json中 配置脚本命名
+    "scripts": {
+      "build": "webpack"    // 这里脚本中的webpack会优先执行局部webpack 找不到再执行全局
+    }
+    执行 npm run build 就是执行 后面的webpack命令   build和webpack形成了映射
+
+   -->
+  <script src="./dist/bundle.js"></script>
+
+
+
+
+</body>
+</html>

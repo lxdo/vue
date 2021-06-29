@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<!-- 视频 https://www.bilibili.com/video/BV15741177Eh?p=17 -->
+<div id="app">
+  <!--
+    v-bind绑定的class中除了可以写 {} (对象语法)
+    还可以写 [] (数组语法)
+
+    可以跟常规class="title"共存
+  -->
+  <!-- 这里active和 line 就是普通类名 -->
+  <h2 class="title" :class="['active','line']">{{message}}</h2>
+  <!-- 这里active和 line 是 vue实例中active和line变量 -->
+  <h2 class="title" :class="[active,line]">{{message}}</h2>
+  <!-- 这里的 [active,line] 内容可以封装到方法中 -->
+  <h2 class="title" :class="getClasses()">{{message}}</h2>
+</div>    
+<script src="../js/vue.js"></script>    
+<script>
+    const app =new Vue({
+        el:"#app",
+        data:{
+            message:"hello",
+            active:"aaa",
+            line:"bbb"
+        },
+        methods: {
+          getClasses:function(){
+            return [this.active,this.line]
+          }
+        }
+
+    })
+</script>
+</body>
+</html>

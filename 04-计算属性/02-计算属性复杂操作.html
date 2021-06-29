@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<!-- 视频 https://www.bilibili.com/video/BV15741177Eh?p=22 -->
+<div id="app">
+    <h2>books总价格:{{totalPrice}}</h2>
+</div>    
+<script src="../js/vue.js"></script>    
+<script>
+    const app =new Vue({
+        el:"#app",
+        data:{
+            books:[
+              {id:110,name:'Unix编程艺术',price:119},
+              {id:111,name:'代码大全',price:105},
+              {id:112,name:'深入理解计算机原理',price:98},
+              {id:113,name:'现代操作系统',price:87},
+            ]
+        },
+        // 计算属性中方法多次调用有缓存机制 ,效率更高,而methods中方法多次调用,多次执行
+        computed: {
+          totalPrice:function(){
+            let total=0
+            // es5语法
+            for(let i=0;i<this.books.length;i++ ){
+              total+=this.books[i].price
+            }
+            console.log(total)
+            // es6语法
+            for(let i in this.books){
+              console.log(i)
+              total+=this.books[i].price
+            }
+            console.log(total)
+            // es6语法
+            for(let book of this.books){
+              console.log(book)
+              total+=book.price
+            }
+            console.log(total)
+            // 上面计算了3次
+            return total/3
+          }
+        }
+
+    })
+</script>
+</body>
+</html>

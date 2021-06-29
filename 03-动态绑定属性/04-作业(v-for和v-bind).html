@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+<style>
+  .active{
+    color: red;
+  }
+</style>
+</head>
+
+<body>
+<!--
+  作业:实现点击列表中的哪一项，哪一项就变红色
+-->
+<div id="app">
+    <ul>
+      <!--
+        自定义数组元素名  in 数组
+      <li v-for="m in movies">{{m}}</li>
+      -->
+        <!-- (自定义数组元素名value,元素key)  in 数组-->
+        <!-- 方法中添加参数 可在vue methods中getColor接收 -->
+        <!-- {active:index == mark} 在v-bind 动态绑定class 对象中可以用逻辑表达式 -->
+      <li @click="getColor(index)" :class="{active:index == mark}" v-for="(m,index) in movies">{{index}} {{m}}</li>
+    </ul>
+</div>    
+<script src="../js/vue.js"></script>    
+<script>
+    const app =new Vue({
+        el:"#app",
+        data:{
+            movies:['海王','海尔兄弟','火影忍者','进击的巨人'],
+            mark:-1, // 默认 -1
+        },
+        methods: {
+          getColor(index){
+            console.log(index)
+            if(index==this.mark){ 
+              this.mark=-1   
+            }else{
+              this.mark=index
+            }
+            console.log(this.mark)
+          }
+        }
+    })
+
+    /*
+      
+     */
+</script>
+</body>
+</html>

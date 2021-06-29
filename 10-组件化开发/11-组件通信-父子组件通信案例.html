@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <!--
+    需求:1.在子组件模板 input框中输入数字n 子组件字段cnum1改变为n 父组件num1改变为n  (子cnum2、父num2同理)
+        2.在第一个input框中输入数字n 子组件字段cnum2改为n*100 父组件num2改为n*100
+
+    分析:
+        1.子组件字段cnum1和父组件num1绑定 子组件字段cnum2和父组件num2绑定   
+        2.Vue不允许在子组件中改变 像cnum1和父组件num1绑定的子组件字段 
+          应该改变父组件num1导致子组件cnum1改变  (子cnum2、父num2同理)
+        3.在子组件 增加字段 dnum1(默认值是cnum1)  用来和input内容绑定  接收输入值
+        4.同时input输入 触发dnum1Input事件 在dnum1Input事件中 修改dnum1值 
+        并发送自定义事件cnum1change给父组件 让父组件num1改成dnum1
+        5.在使用组件时 子组件自定义事件cnum1change 触发 父组件num1change事件
+        在num1change中把num1改为dnum1的值 从而促使cnum1的改变
+        
+  -->
+  <div id="app">
+    <!-- 
+      父组件 num1和子组件cnum1绑定 num2和子组件cnum2绑定
+      子组件 cnum1change自定义事件触发父组件num1change事件 cnum2change自定义事件触发父组件num2change事件
+    -->
+    <cpn :cnum1="num1" @cnum1change="num1change" :cnum2="num2" @cnum2change="num2change"></cpn>
+  </div>  
+  
+  <!-- 子组件模板 -->
+  <template id="cpn">
+    <!-- 组件模板中要有个根标签 -->
+    <div>
+      <!-- 子组件cnum1字段 该字段应由父组件num1改变而导致其改变 -->
+      <h2>props:{{cnum1}}</h2>
+      <!-- 子组件自有字段-->
+      <h2>data:{{dnum1}}</h2>
+      <!-- input和dnum1绑定 并绑定input事件触发dnum1Input方法-->
+      <input type="text" v-bind:value="dnum1" @input="dnum1Input">
+
+      <h2>props:{{cnum2}}</h2>
+      <h2>data:{{dnum2}}</h2>
+      <input type="text" v-bind:value="dnum2" @input="dnum2Input">
+    </div>
+  </template>
+<script src="../js/vue.js"></script>    
+<script>
+    const app = new Vue({
+        el:"#app",
+        data:{
+            num1:1,
+            num2:0
+        },
+        methods: {
+          // 父组件 事件方法
+          num1change(value){
+            console.log(typeof value) // string 
+
+            this.num1=parseFloat(value) // 转成Number
+          },
+          num2change(value){
+            this.num2=parseFloat(value) // 转成Number
+          }
+        },
+        components: {
+          cpn:{
+            template:'#cpn',
+            // 子组件和父组件绑定字段 这里的字段改变要通过父组件绑定字段修改
+            props: {
+              cnum1:Number,
+              cnum2:Number
+            },
+            // 子组件数据字段
+            data(){
+              return {
+                dnum1:this.num1,
+                dnum2:this.num2
+              }
+            },
+            methods: {
+              // input触发事件方法
+              dnum1Input(event){
+                // 1.将子组件模板 input中的value赋值给dum1
+                this.dnum1= event.target.value
+                // 2.发出事件 让父组件num1改成dum1的值
+                this.$emit('cnum1change',this.dnum1) // 在使用组件时cnum1change触发num1change
+                 
+                // 需求2
+                // 3.同时修改子组件 dnum2的值
+                this.dnum2=this.dnum1*100
+                // 4.发出事件 让父组件num2改成dnum2的值
+                this.$emit('cnum2change',this.dnum2)
+
+              },
+              dnum2Input(){
+                // 1.将子组件模板 input中的value赋值给dum2
+                this.dnum2= event.target.value    
+                // 2.发出事件 让父组件num2改成dum2的值
+                this.$emit('cnum2change',this.dnum2)
+              }
+            }
+          }
+        }
+
+    })
+</script>
+</body>
+</html>

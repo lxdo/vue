@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <script>
+    // 链式编程
+    // 实例化Promise时参数是函数
+    // 函数的参数resolve和reject也是函数
+    new Promise((resolve,reject)=>{
+      // 第一次网络请求的代码
+      setTimeout(()=>{
+        resolve()
+      },1000)
+    }).then(()=>{
+      // 第一次拿到结果的处理代码
+      console.log('hello world');
+      console.log('hello world');
+      console.log('hello world');
+      console.log('hello world');
+
+      return new Promise((resolve, reject)=>{
+        // 第二次网络请求的代码
+        setTimeout(()=>{
+          resolve()
+        },1000)
+      })
+    }).then(()=>{
+      // 第二次处理的代码
+      console.log('hello vue');
+      console.log('hello vue');
+      console.log('hello vue');
+      console.log('hello vue');
+
+      return new Promise((resolve, reject)=>{
+        // 第三次网络请求的代码
+        setTimeout(()=>{
+          resolve()
+        },1000)
+      })
+    }).then(()=>{
+      // 第三次处理的代码
+      console.log('hello python');
+      console.log('hello python');
+      console.log('hello python');
+      console.log('hello python');
+    })
+
+    /*
+    什么情况下会用到promise
+      一般情况下是有异步操作时，使用Promise对这个异步操作进行封装
+     new--->构造函数(1.保存了一些状态信息 2.执行传入的函数)
+     在执行传入的回调函数时，会传入两个参数，resolve,reject本身又是函数
+     */
+    new Promise((resolve, reject)=>{
+      // 网络请求 返回data
+      let data = {'name':'jack'}
+      // 请求成功时调用
+      resolve(data)
+      // 请求失败时调用
+      reject('error message')
+    }).then((data)=>{ // 成功时调用
+      // 处理网络请求获得的data
+      console.log(data);
+    }).catch(err=>{ // 失败时调用
+      console.log(err);
+    })
+  </script>
+</body>
+</html>

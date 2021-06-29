@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<!-- 
+  简书: VUE中演示v-for为什么要加key
+  https://www.jianshu.com/p/4bd5e745ce95
+-->
+<!--视频 https://www.bilibili.com/video/BV15741177Eh?p=38 -->
+<div id="app">
+    <ul>
+      <!-- 
+        官方推荐我们在使用 v-for时，给对应标签元素或组件添加:key属性
+        :key属性值要保证唯一 给每个节点做一个唯一标识 
+
+        作用:key的作用主要是为了高效的更新虚拟DOM
+        当往数组/对象中间加元素，会高效更新虚拟DOM,实现渲染
+      -->
+      <!-- 遍历letters数组 -->
+      <li v-for="(item,index) in letters" :key="item">{{item}}</li>
+    </ul>
+</div>    
+<script src="../js/vue.js"></script>    
+<script>
+    const app =new Vue({
+        el:"#app",
+        data:{
+          letters:['A','B','C','D','E']
+        },
+    })
+
+    // 向letters中间插入一个元素
+    app.letters.splice(2,0,'F')
+    /*
+      数据改变页面自动更新原因:数据是响应式的
+    */
+
+</script>
+</body>
+</html>

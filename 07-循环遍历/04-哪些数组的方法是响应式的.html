@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<!--
+  响应式:数据改变 页面也同步改变
+  支持响应式的数组方法:
+    push
+
+-->
+<div id="app">
+    <ul>
+      <!-- 
+        要让key属性值唯一 
+        如果key属性值不唯一 会产生vue warn报错
+      -->
+      <li v-for="(item,index) in letters" :key="index+item">{{item}}</li>
+    </ul>
+    <button @click="btn1Click">按钮</button>
+    <button @click="btn2Click">按钮</button>
+</div>    
+<script src="../js/vue.js"></script>    
+<script>
+    const app =new Vue({
+        el:"#app",
+        data:{
+           letters:['A','B','C','D']
+        } ,
+        methods: {
+          btn1Click(){
+            // 支持响应式 数组改变 页面也改变
+            // 1.push 向数组最后添加元素
+            this.letters.push('E')
+            console.log(this.letters)
+            this.letters.push('F','G','H') // push可以向数组最后添加多个元素
+            console.log(this.letters) // 数组改变 页面也改变了
+            
+            // 2.pop 删除数组最后一个元素
+            this.letters.pop()
+            console.log(this.letters)
+
+            // 3.shift 删除数组第一个元素
+            this.letters.shift()
+            console.log(this.letters)
+
+            // 4.unshift 向数组最前面添加元素
+            this.letters.unshift('ok')
+            console.log(this.letters)
+            this.letters.unshift('hello','world') // unshift可以向数组最前面添加多个元素
+            console.log(this.letters)
+
+            // 5.splice   有三个作用 可以删除元素、插入元素、替换元素
+            /*
+              第一个参数:开始位置(索引)
+              第二个参数:
+                删除元素 表示要删除几个元素 如果没有传 就把从开始位置(索引)到最后全部删掉
+                替换元素 表示要替换几个元素 后面的参数是用于替换的新元素  splice(1,3,'m','n','l','o')
+                插入元素 0 表示不删除或替换元素  后面的参数用于插入的新元素 splice(1,0,'m','n','l','o')
+
+            */  
+            
+            this.letters.splice(1,1) // 从索引为1开始，删除1个元素
+            // 6.sort 排序
+            this.letters.sort()
+            // 7.reverse() 反转
+            this.letters.reverse()
+          },
+          btn2Click(){
+            // 不支持响应式
+            // 1.通过索引值修改数组中的元素 
+            this.letters[0]='aaa'
+            console.log(this.letters) //  ["aaa", "B", "C", "D", "E", "E", "E", __ob__: Observer] 
+            // 其实数组letters已经改变了 但页面没有变化
+
+            // 如何实现修改数组元素支持响应式
+            // 1.通过splice替换
+            this.letters.splice(0,1,'bbbb') // 0(索引) 1(替换1个) 'bbbb' (替换成bbbb)
+            // 2.通过vue.set(要修改的对象,要修改元素的索引值,修改后的值) 方法
+            Vue.set(this.letters,0,'xxxxx')
+
+          }
+        }
+    })
+
+    // 可变参数 参数个数不确定
+    function sum (...num){
+      console.log(num) // num是多个参数组成的数组
+      sum=0
+      for(let item of num){
+        sum+=item
+      }
+
+      return sum
+    }
+
+    sum(10,20,30,40,50) // 可以传入多个参数
+</script>
+</body>
+</html>

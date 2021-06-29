@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-once</title>
+</head>
+<body>
+<!-- 视频 https://www.bilibili.com/video/BV15741177Eh?p=14 -->
+<div id="app">
+  <!--
+  响应式
+  1.在正常情况下 message值发生变化 html标签值也会改变
+  2.在console控制台 写 app.message = 'world' 页面也变成 world
+  -->
+<h2>{{message}}</h2>
+<!--
+  v-once 后面不需要跟任何表达式 
+  作用 表示元素或组件只会渲染一次，首次渲染展示数据后，不会再随着变量数据的改变而重新渲染
+  下面只会展示第一次获取到的message数据 后面message改变 这里不会改变
+-->
+<h2 v-once>{{message}}</h2>
+</div>    
+<script src="../js/vue.js"></script>    
+<script>
+    const app =new Vue({
+        el:"#app",
+        data:{
+            message:"hello"
+        },
+
+    })
+    app.message='world'
+</script>
+</body>
+</html>

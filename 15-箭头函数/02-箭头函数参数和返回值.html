@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    // 箭头函数参数问题
+    // 1.两个参数
+    const sum = (n1, n2) => {
+        return n1 + n2
+    }
+    // 2.一个参数 参数列表括号可以省略
+    const power = num => {
+        return num * num
+    }
+
+    // 箭头函数方法体问题
+    // 1.方法体中有多行代码
+    const a = () => {
+        // 打印hello
+        console.log('hello')
+        console.log('world')
+    }
+    // 2.方法体中有一行代码  会自动return 结果
+    const sub = (n1, n2) => n1-n2
+    console.log(sub(30, 20));
+    // 3.方法体中有一行代码，没有返回值 会自动return undefined
+    const con =()=> console.log('hello console')
+    console.log(con()); // undefined 函数没有返回值
+
+
+</script>
+</body>
+</html>

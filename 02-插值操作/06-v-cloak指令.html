@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      /*
+      当标签中有v-cloak属性 说明js vue代码还未解析执行  可以先将标签设置为 display: none;
+      防止 页面直接显示 {{message}}
+      当js vue代码解析执行 标签中的v-cloak属性会被自动去掉 ,页面也就渲染显示
+      */
+      [v-cloak]{
+        display: none; 
+      }
+    </style>
+</head>
+<body>
+
+<div id="app" v-cloak>
+<!--
+  程序是从上向下执行
+  html标签先加载 js代码后加载
+  当网络延迟导致 html标签加载出来而js代码没有执行 就会在页面瞬时直接展示 {{message}}
+
+  在html标签加上 v-cloak指令后
+  1.在js vue解析之前，div中有一个属性 v-cloak
+  2.在js vue解析之后，div中就自动去掉属性 v-cloak
+  由标签中是否有v-cloak属性而判断js代码是否执行解析
+-->
+<h2>{{message}}</h2>
+</div>    
+<script src="../js/vue.js"></script>    
+<script>
+
+  // 延迟1s处理这段代码
+  setTimeout(function(){
+    const app =new Vue({
+        el:"#app",
+        data:{
+            message:"hello"
+        },
+
+    })
+  },1000)
+    
+</script>
+</body>
+</html>

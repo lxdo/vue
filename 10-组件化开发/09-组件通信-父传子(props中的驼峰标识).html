@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+    <!-- 
+      正常小写字段  v-bind 写法 :cinfo="info" 
+
+      驼峰写法字段  v-bind绑定的字段不支持驼峰写法 驼峰写法的字段 在v-bind时需要转换成 - 写法 如 cBook 换成 c-book
+      v-bind 写法 :c-book="book"
+      子组件字段childMyMessage 在v-bind时写成 :child-my-message="message"
+     -->
+    <cpn :cinfo="info" :c-book="book" :child-my-message="message"></cpn> <!-- 使用组件时把父组件info数据传给子组件cinfo-->
+  </div> 
+
+  <template id="cpn">
+    <!-- 如果在子组件中包含很多标签 需要用外层标签包住 如用div包住 -->
+    <div>
+      <h2>{{cinfo}}</h2> <!-- 在组件模板中使用子组件数据字段 -->
+      <h2>{{cBook}}</h2> <!-- 子组件驼峰写法字段 在组件模板中使用还是驼峰写法 -->
+      <h2>{{childMyMessage}}</h2>
+    </div>
+  </template>
+<script src="../js/vue.js"></script>    
+<script>
+
+    // 组件构造器
+    const cpn ={
+      template:'#cpn',
+      props: { // 子组件数据字段
+        // 正常小写字段
+        cinfo:{
+          type:Object, // 字段数据类型
+          default(){ // 默认值  对象/数组 默认值是函数
+            return {}
+          }
+        },
+        // 驼峰写法字段 (有区别)
+        cBook:{
+          type:Object, // 字段数据类型
+          default(){ // 默认值  对象/数组 默认值是函数
+            return {}
+          }
+        },
+        childMyMessage:{
+          type:String,
+          default:''
+        }
+      }
+    }
+    const app =new Vue({
+        el:"#app",
+        data:{
+          // 父组件数据
+            info:{
+              name:'why',
+              age:18,
+              height:1.99
+            },
+            book:{
+              name:'《代码简洁之道》',
+              price:100,
+            },
+            message:'hello world'
+          
+
+        },
+        // 注册组件
+        components: {
+          cpn // vue实例的子组件  
+        }
+
+    })
+</script>
+</body>
+</html>

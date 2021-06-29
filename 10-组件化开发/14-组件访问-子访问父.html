@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+    <cpn></cpn>
+  </div>    
+  <!--
+    子组件访问父组件属性和方法
+    1.子组件（ccpn）访问父组件 (cpn) this.$parent
+    2.子组件 (ccpn) 访问根组件 (vue) this.$root
+  -->
+  <!-- vue实例的子组件cpn组件模板 -->
+  <template id="cpn">
+    <div>
+      <h2>我是cpn组件</h2>
+      <ccpn></ccpn>    
+    </div>
+  </template>
+
+  <template id="ccpn">
+    <div>
+      <h2>我是cpn组件的子组件ccpn</h2>
+      <button @click="btnClick">ccpn按钮</button>
+    </div>
+  </template>
+
+  <!-- cpn的子组件ccpn组件模板-->
+<script src="../js/vue.js"></script>    
+<script>
+    const app =new Vue({
+        el:"#app",
+        data:{
+            message:"我是Vue实例中的message"
+        },
+        methods: {
+          vueMethod(){
+            console.log('vueMethod')
+          }
+        },
+        // 在vue实例注册子组件
+        components: {
+          cpn:{ // cpn是Vue实例的子组件
+            template:'#cpn',
+            data(){
+              return {
+                name:'我是cpn组件的name'
+              }
+            },
+            methods: {
+              cpnMethod(){
+                console.log('cpnMethod')
+              }
+            },
+            // 在cpn中注册子组件
+            components: {
+              ccpn:{ // ccpn是cpn的子组件
+                template:'#ccpn',
+                methods: {
+                  btnClick(){
+                    // 1.访问父组件属性和方法 this.$parent
+                    console.log(this.$parent)  // 父组件信息对象
+                    
+                    // 访问父组件中属性
+                    console.log(this.$parent.name) 
+                    // 访问父组件中方法  
+                    this.$parent.cpnMethod() 
+
+                    // 2.访问根组件(vue实例)
+                     console.log(this.$root) // 根组件Vue实例信息对象   
+                    // 访问根组件中属性
+                    console.log(this.$root.message)
+                    // 访问根组件中方法
+                    this.$root.vueMethod()
+                  }
+                },
+              }
+              
+              
+            }
+          
+          }
+        }
+    })
+</script>
+</body>
+</html>

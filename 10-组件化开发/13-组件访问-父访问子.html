@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <!-- 
+    在父组件中访问子组件方法和属性
+    方法一：this.$children
+    方法二: this.$refs
+  -->
+  <div id="app">
+    <cpn></cpn>
+    <!-- this.$refs 方式访问  需要在要访问的子组件上加上ref="xxx"属性 -->
+    <cpn ref="aaa"></cpn>
+    <cpn></cpn>
+    <button @click="btnClick">按钮</button>
+  </div> 
+  
+  <template id="cpn">
+    <div>
+      我是子组件
+    </div>
+  </template>
+<script src="../js/vue.js"></script>    
+<script>
+    const app =new Vue({
+        el:"#app",
+        data:{
+            message:"hello"
+        },
+        methods: {
+          btnClick(){
+            // 方法一:在父组件中访问子组件 this.$children (用的较少)
+            console.log(this.$children) //  [VueComponent(子组件信息对象), VueComponent, VueComponent]    
+            // 在页面调用几个子组件 数组中就有几个子组件信息对象 可以根据子组件信息对象获取相应子组件中的方法和属性
+            
+            // 在父组件中调用子组件方法
+            this.$children[0].showMessage()
+            // 在父组件中访问子组件属性字段
+            console.log(this.$children[0].name)
+            
+            // this.$children 是 子组件信息对象 组成的数组
+            for (let c of this.$children){ // c是每个子组件信息对象
+              console.log(c.name)
+              c.showMessage()
+            }
+
+            // 方法二:在父组件中访问子组件 this.$refs (用的较多)
+            console.log(this.$refs) // {aaa: VueComponent}  子组件ref属性值:子组件信息对象
+            // 以子组件上的ref属性值为key  子组件信息对象为value 组成的对象
+            console.log(this.$refs.aaa.name)
+          }
+        },
+        components: {
+          cpn:{
+            template:'#cpn',
+            data(){
+              return {
+                name:'cpn name'
+              }
+            },
+            methods: {
+              showMessage(){
+                console.log('cpn showMessage')
+              }
+            }
+          }
+        },
+        
+
+    })
+</script>
+</body>
+</html>

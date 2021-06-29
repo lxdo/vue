@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<div id="app">
+  <!--
+    在select中使用v-model
+  -->
+
+  <!-- 选择一个 -->
+    <select name="one" v-model="fruit">
+      <option value="苹果" >苹果</option>
+      <option value="香蕉" >香蕉</option>
+      <option value="榴莲" >榴莲</option>
+      <option value="西瓜" >西瓜</option>
+    </select>
+    <h2>您选择的水果是:{{fruit}}</h2>
+
+    <!-- 选择多个 -->
+    <select name="one" v-model="fruits" multiple> <!-- 加上multiple属性 可以选择多个 -->
+      <option value="苹果" >苹果</option>
+      <option value="香蕉" >香蕉</option>
+      <option value="榴莲" >榴莲</option>
+      <option value="西瓜" >西瓜</option>
+    </select>
+    <h2>您选择的水果是:{{fruits}}</h2>
+</div>    
+<script src="../js/vue.js"></script>    
+<script>
+    const app =new Vue({
+        el:"#app",
+        data:{
+            fruit:'香蕉' ,// 选择一个  默认选中 此处写默认选中项的value
+            fruits:[] ,// 选择多个            
+        },
+
+    })
+</script>
+</body>
+</html>

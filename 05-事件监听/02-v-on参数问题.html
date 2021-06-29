@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<div id="app">
+  <!--
+    总结 1.事件调用的方法没有参数  事件中直接写方法名 @click="btn1Click"
+        2.事件调用的方法有参数    事件中按照正常方法调用传参 @click="btn2Click('tom')"
+        3.事件调用的方法有参数 在方法中想接收 浏览器生成的event事件对象  事件中调用把$event传入方法
+         @click="btn3Click('jack',$event)" 
+  -->
+
+
+
+  <!-- 
+    事件调用的方法没有参数 
+  -->
+
+  <!-- 事件调用的方法没有参数 调用方法时可以加()-->
+    <button @click="btn1Click()">无参有()</button>
+    <!-- 
+      事件调用的方法没有参数 调用方法时可以不加()
+      ***标准写法
+    -->
+    <button @click="btn1Click">无参无() 标准写法</button>
+
+    <!--
+      事件调用的方法有参数
+    -->
+
+    <!-- 事件调用的方法有参数 调用方法时有() 但没有传参 -->
+    <!-- 方法需要参数 但调用时有()未传参 参数就为undefined 不会报错 -->
+    <button @click="btn2Click()">有参有()未传</button> 
+    <!-- 事件调用的方法有参数 调用时没有() 没有传参  -->
+    <!-- 这时vue会默认将浏览器生成的event事件对象作为参数传入到方法 -->
+    <button @click="btn2Click">有参无()未传</button>
+    <!-- 
+      事件调用的方法有参数 调用标准写法
+      ***标准写法
+    -->
+    <button @click="btn2Click('tom')">有参有()传参 标准写法</button>
+
+    <!-- 
+      方法调用时，我们需要event对象,同时也需要其他参数 
+    -->
+    
+    <!-- 方法(name event)需要参数 方法调用时 未加() 未传参 -->
+    <!--
+      vue会默认将浏览器生成的event事件对象作为参数传入到方法的第一个参数
+      后面的参数都是undefined
+    -->
+    <button @click="btn3Click">多参无()未传</button>
+    <!-- 
+      方法调用时，我们需要event对象($event传入方法),同时也需要其他参数 
+      ***标准写法
+     -->
+    <button @click="btn3Click('jack',$event)">多参有()传参 标准写法</button>
+</div>    
+<script src="../js/vue.js"></script>    
+<script>
+    const app =new Vue({
+        el:"#app",
+        data:{
+            message:"hello"
+        },
+        methods: {
+          // 无参数
+          btn1Click(){
+            console.log('btn1Click')
+          },
+          // 有参数
+          btn2Click(event){
+            console.log('-----',event)
+          },
+          // 有参数 name  event(event对象)
+          btn3Click(name,event){
+            console.log('++++++',name,event)
+          }
+        }
+
+    })
+
+
+
+    // 如果函数需要参数，但调用时没有传参,那么函数的形参为undefined
+    function abc(name){ // 函数需要name参数
+      console.log(name)
+    }
+    abc() // 调用时没有传参  name就是undefined 不会报错
+
+
+</script>
+</body>
+</html>

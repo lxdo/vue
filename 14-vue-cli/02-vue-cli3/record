@@ -1,0 +1,39 @@
+vue-cli3
+创建项目 vue create 项目名称
+
+? Please pick a preset: (Use arrow keys)
+❯ Default ([Vue 2] babel, eslint)  // 默认选择vue2的配置
+  Default (Vue 3) ([Vue 3] babel, eslint) // vue3的配置
+  Manually select features  // 手动选择配置
+
+// 手动选择配置
+? Check the features needed for your project: (Press <space> to select, <a> to t
+oggle all, <i> to invert selection)
+❯◉ Choose Vue version
+ ◉ Babel
+ ◯ TypeScript
+ ◯ Progressive Web App (PWA) Support
+ ◯ Router
+ ◯ Vuex
+ ◯ CSS Pre-processors
+ ◉ Linter / Formatter  // 代码规范检查
+ ◯ Unit Testing
+ ◯ E2E Testing
+
+// 选择vue版本
+? Choose a version of Vue.js that you want to start the project with (Use arrow
+keys)
+❯ 2.x
+  3.x
+
+// 配置文件存放位置
+? Where do you prefer placing config for Babel, ESLint, etc.? (Use arrow keys)
+❯ In dedicated config files  // 独立的配置文件
+  In package.json // 在package.json文件中
+
+
+目录介绍
+public相当于static 会被直接复制进打包后的dist
+.browserslistrc 浏览器配置
+.gitignore git提交忽略内容
+

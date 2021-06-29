@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<div id="app">
+  <!--
+    v-model实现双向绑定
+    <input type="text" v-model="字段"> 把input输入框内容和字段实现双向绑定
+    1.当message改变 input内容同步改变
+    2.当input内容改变 message同步改变
+  -->
+    <input type="text" v-model="message">  <!-- 这里input输入内容改变 message同步改变 -->
+
+    <h2>{{message}}</h2>
+</div>    
+<script src="../js/vue.js"></script>    
+<script>
+    const app =new Vue({
+        el:"#app",
+        data:{
+            message:"hello" // 这里message改变 input内容同步改变
+        },
+
+    })
+</script>
+</body>
+</html>

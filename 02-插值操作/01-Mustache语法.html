@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mustache语法</title>
+</head>
+<body>
+<!-- 视频 https://www.bilibili.com/video/BV15741177Eh?p=13 -->
+<div id="app">
+<!-- {{xxx}} 被称为mustache语法 -->
+{{message}} 
+<!-- 可以被标签渲染 -->
+<h1>{{message}}</h1>
+<!-- mustache语法 不仅可以直接写变量 也可以写简单的表达式 -->
+<h2>{{firstName+lastName}}</h2>
+<h2>{{firstName+' '+lastName}}</h2>
+<!-- 可以分开写出 -->
+<h2>{{firstName}} {{lastName}}</h2>
+<!-- mustache语法可以写简单的表达式  -->
+<h2>{{count*2}}</h2>
+</div>    
+<script src="../js/vue.js"></script>    
+<script>
+    const app =new Vue({
+        el:"#app",
+        data:{
+            message:"hello",
+            firstName:"kube",
+            lastName:"brtany",
+            count:100
+        },
+
+    })
+</script>
+</body>
+</html>

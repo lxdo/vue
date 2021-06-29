@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<div id="app">
+  <!-- 
+    创建三个组件实例 (组件三次调用)
+
+   -->
+    <cpn></cpn>
+    <cpn></cpn>
+    <cpn></cpn>
+</div>    
+
+<!-- 组件模板 -->
+<template id="cpn">
+  <div>
+    <h2>当前计数: {{count}}</h2>
+    <button @click="increment">+</button>
+    <button @click="decrement">-</button>
+  </div>
+</template>
+<script src="../js/vue.js"></script>    
+<script>
+  // 注册组件(全局)
+  Vue.component('cpn', {
+    template:'#cpn',
+    // 定义组件中的数据 在组件模板中可以访问
+    /*
+      为什么data必须是一个函数呢?
+      因为组件会多次复用
+      data函数每次返回出来的对象都是新的对象 
+      保证各个组件之间的数据互不影响
+      案例见下面案例1
+    */
+    data(){
+      return {
+        count:0
+      }
+    },
+    // 定义组件中的方法 在组件模板中可以调用
+    methods: {
+      increment(){
+        this.count++
+      },
+      decrement(){
+        this.count--
+      },
+    }
+  
+  })
+    const app =new Vue({
+        el:"#app",
+        data:{
+            message:"hello"
+        },
+
+    })
+
+    // 案例1
+    // 函数ob1 返回一个对象
+    function ob1(){
+      return {
+        name:'why',
+        age:18
+      }
+    }
+
+    // 对象obj1和obj2不是同一个对象 是不同的对象
+    let obj1=ob1() 
+    let obj2=ob1()
+    obj1.name='jack'
+    console.log('obj1',obj1)
+    console.log('obj2',obj2)
+    
+    // 案例2
+    // 定义对象
+    const obj={
+      name:'tom',
+      age:20
+    }
+    // 函数ob2返回obj对象
+    function ob2(){
+      return obj
+    }
+
+    // 对象obj3和obj4是同一个对象
+    let obj3=ob2()
+    let obj4=ob2()
+    obj3.name='mary'
+    console.log('obj3',obj3)
+    console.log('obj4',obj4)
+
+
+
+</script>
+</body>
+</html>

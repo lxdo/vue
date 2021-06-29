@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<!--
+      v-for遍历对象
+    -->
+<div id="app">
+  <ul>
+    <!-- 未使用键 v-for="值 in 对象" -->
+    <li v-for="item in info">{{item}}</li>
+  </ul>
+  <ul>
+    <!-- 使用键 v-for="(值,键) in 对象" -->
+    <li v-for="(value,key) in info">{{key}} : {{value}}</li>
+  </ul>
+
+  <ul>
+    <!-- 使用键和索引 v-for="(值,键,索引) in 对象" -->
+    <li v-for="(value,key,index) in info">{{index}} {{key}} : {{value}}</li>
+  </ul>
+</div>    
+<script src="../js/vue.js"></script>    
+<script>
+    const app =new Vue({
+        el:"#app",
+        data:{
+            info:{
+              name:'why',
+              age:18,
+              height:1.88
+            }
+        },
+
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+spa页面:单页面富应用
+    整个网页只有一个html页面
+
+改变url 页面不刷新
+https://www.bilibili.com/video/BV15741177Eh?p=102
+
+1.改变url hash
+location.hash = 'foo'
+
+2.history
+html5 history以栈的方式来管理url
+
+

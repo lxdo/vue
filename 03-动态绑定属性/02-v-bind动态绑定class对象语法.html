@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      .active{
+        color: red;
+      }
+    </style>
+</head>
+<body>
+<!-- 视频 https://www.bilibili.com/video/BV15741177Eh?p=16 -->
+<div id="app">
+ <!-- 传统 div class属性 这里的active 是普通类名  -->
+<h2 class="active">{{message}}</h2>
+<!-- v-bind 动态绑定class属性 -->
+<!-- 这里把class属性值 动态绑定为active的值 值为字符串 这里active为vue实例中active字段-->
+<h2 :class="active">{{message}}</h2>
+
+<!-- 
+  v-bind 动态绑定class属性 
+  class属性值也可以是对象形式
+  v-bind:class="{key1:value1,key2:value2}"
+-->
+<h2 v-bind:class="{key1:value1,key2:value2}">{{message}}</h2>
+<!-- 
+  当bool值为true时，该类会被添加到class属性
+  当bool值为false时，该类不会被添加到class属性
+  通过控制好bool值来控制类是否添加为class属性
+-->
+<h2 v-bind:class="{类名1:bool值,类名2:bool值}">{{message}}</h2>
+<!-- 这里的active为 普通类名  -->
+<!-- 通过控制vue实例中isActive和isLine的值 来 控制 class的属性类-->
+<!-- 同时支持原生的class类 (一些固定的类这样写) 和 v-bind绑定class类 (需要动态更换class类这样写)写法-->
+<h2 class="title" v-bind:class="{active:isActive,line:isLine}">{{message}}</h2>
+
+<!-- 
+  v-bind:class="{active:isActive,line:isLine}" 
+  给class 通过v-bind动态绑定类  后面的代码写的太长可以优化
+  把内容封装到方法中 在这里调用  调用需要加()
+-->
+<h2 class="title" v-bind:class="getClasses()">{{message}}</h2>
+<!-- 绑定点击事件 -->
+<button v-on:click="btnClick">按钮</button>
+</div>    
+<script src="../js/vue.js"></script>    
+<script>
+    const app =new Vue({
+        el:"#app",
+        data:{
+            message:"hello",
+            active:"active",
+            isActive:true,
+            isLine:false
+        },
+        methods: {
+          btnClick:function(){
+              this.isActive=!this.isActive // 每次点击后vue实例中isActive值取反
+          },
+          getClasses:function(){
+            return {active:this.isActive,line:this.isLine}
+          }
+        }
+
+    })
+</script>
+</body>
+</html>

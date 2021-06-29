@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+
+  <!--
+    loader使用:
+      1.通过npm安装需要使用的loader
+        常用loader https://www.webpackjs.com/loaders/ 可以根据不同文件类型选择不同loader
+         css -> style-loader和css-loader
+          less -> less-loader
+          文件(图片) -> url-loader  (文件小于url-loader配置的limit使用这个)
+                       file-loader (文件大于url-loader配置的limit使用这个)
+          ES6转ES5   babel-loader
+           npm install --save-dev babel-loader@7 (@7是指定版本号) babel-core (必须) babel-preset-es2015 (es2015就是ES6)
+        vue  vue-loader
+            1.npm install vue-loader vue-template-compiler --save-dev
+                如果安装的vue-loader版本过高，出现报错 可以在package.json修改版本 重新执行npm install
+            2.webpack配置loader modules、resolve、plugins
+      2.在webpack.config.js中的module关键字下进行配置
+        使用教程:
+        css https://www.webpackjs.com/loaders/css-loader/
+        less https://www.webpackjs.com/loaders/less-loader/
+        文件(图片)  https://www.webpackjs.com/loaders/url-loader/
+                  https://www.webpackjs.com/loaders/file-loader/
+        ES6转ES5    https://www.webpackjs.com/loaders/babel-loader/
+      3.在js入口程序加载依赖的文件
+        css  require('./css/normal.css')
+        less require('./css/special.less')
+      4.执行 npm run build
+
+    webpack配置vue
+      1.npm install vue --save
+      2.使用vue进行开发 在js入口程序引入vue
+        import Vue from "vue";
+      3.安装配置 vue-loader
+      4.在webpack.config.js配置
+         resolve:{
+            alias:{ // 别名
+                'vue$':'vue/dist/vue.esm.js'
+                // 在代码中 import Vue from "vue" 默认引用 node_modules/vue/dist/vue.runtime.js中Vue对象
+                // 如果配置此项 就会引用 node_modules/vue/dist/vue.esm.js中Vue对象
+            }
+         },
+         // 插件
+        plugins:[
+            new VueLoaderPlugin() ,// 使用vue-loader 一定要配置这个
+        ]
+
+   -->
+
+  <!--真实开发 入口index.html 标签只写下面这样 挂载个vue实例-->
+  <div id="app">
+
+  </div>
+  <script src="./dist/bundle.js"></script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01-HelloVuejs</title>
+</head>
+<body>
+
+<!-- id="app" 用于和Vue实例绑定--> 
+<!-- {{message}} 显示vue实例定义的数据data-->
+<div id="app">
+    {{message}}
+    <h1>{{name}}</h1>  
+</div> 
+<div>{{message}}</div>
+
+<script src="../js/vue.js"></script>
+<script>
+    // let(es6定义变量) const(es6定义常量)
+    // 后面可能更改变量值 用let定义变量
+    let name = "jack"
+    name="tom"
+    // 后面不会更改变量值 用const定义常量
+    const status=1
+
+    // 编程范式:声明式编程
+    // 创建Vue实例 在../js/vue.js中有Vue类
+    const app = new Vue({ // 参数为对象
+        el:"#app" ,// 和id=app元素绑定 用于挂载要管理的元素 el属性决定这个vue对象挂载到哪一个元素上
+        data:{ // 定义数据，可以显示在绑定元素 该属性中通常会存储一些数据 可以是我们直接定义 也可以来自请求响应
+            message:"你好,李银河！",
+            name:"jack"
+        }
+    })
+
+    // 好处:1.数据和界面完全分离 2.响应式:当数据发生改变，界面无需调整，自动改变
+
+</script>
+
+
+</body>
+</html>

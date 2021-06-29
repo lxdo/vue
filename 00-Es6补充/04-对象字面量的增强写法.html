@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+    
+<script>
+
+  // 定义对象时 {}写法就叫对象的字面量
+  const obj ={} 
+
+  // ES5定义对象写法(对象的字面量)
+  const ob ={
+    name:'why',
+    age:18,
+    run:function(){
+      console.log('running')
+    },
+    eat:function(){
+      console.log('eating')
+    }
+  }
+
+  // 1.属性的增强写法
+  // 实现: 对象内属性用对象外的变量
+  // 定义常量
+  const name = 'jack'
+  const age = 20
+  const height = 2.0
+
+  // ES5 写法 对象属性用外面变量
+  const obj1={
+    name:name,
+    age:age,
+    height:height
+  }
+  console.log(obj1)
+  // ES6写法 
+  const obj2={
+    name,
+    age,
+    height
+  }
+  console.log(obj2)
+
+  // 1.函数的增强写法
+  // 实现:在对象内定义函数
+  // ES5写法
+  const obj3={
+    run:function(){
+      
+    }
+  }
+
+  // ES6写法 
+  const obj4={
+    run(){
+
+    }
+  }
+</script>  
+</body>
+</html>

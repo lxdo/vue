@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <!-- 
+    组件插槽是为了让组件模板更具扩展性
+  -->
+  <div id="app">
+    <!-- 使用了多次组件 组件显示内容需求有所不同 -->
+
+    <!-- 1.除了展示组件内容 还想显示一个buuton标签 -->
+    <!-- 在组件标签中写的内容会被替换到组件模板插槽位置-->
+    <cpn>
+      <button>按钮</button>
+    </cpn>
+
+    <!-- 2.除了展示组件内容 还想显示一个span标签 -->
+    <!-- 在组件标签中写的内容会被替换到组件模板插槽位置-->
+    <cpn>
+      <span style="color: red;">哈哈哈哈哈哈哈</span>
+    </cpn>
+
+    <!-- 3.除了展示组件内容 还想显示一个a标签 -->
+    <!-- 在组件标签中写的内容会被替换到组件模板插槽位置-->
+    <cpn>
+      <a href="http://www.baidu.com" >百度一下</a>
+    </cpn>
+
+    <!-- 4.除了展示组件内容 还想显示一个buuton标签 -->
+    <!-- 在组件标签中没有写内容 会采用组件模板插槽中的默认内容-->
+    <cpn></cpn>
+
+    <!-- 5.除了展示组件内容 还想显示多个内容 -->
+    <!-- 当组件标签中写很多内容时 都会被替换到组件模板插槽位置-->
+    <cpn>
+      <h2>我是特有内容1</h2>
+      <h2>我是特有内容2</h2>
+      <h2>我是特有内容3</h2>
+    </cpn>
+  </div>    
+
+  <template id="cpn">
+    <div>
+      <h2>我是组件</h2>
+      <p>我是组件,哈哈哈</p>
+      <!--在组件中预留插槽 让组件模板更具扩展性 -->
+      <!-- 组件模板插槽中的内容是默认内容  当使用组件时 组件标签中没有写内容 会采用这里的默认内容 -->
+      <slot><button>按钮</button></slot>
+    </div>
+  </template>
+<script src="../js/vue.js"></script>    
+<script>
+    const app =new Vue({
+        el:"#app",
+        data:{
+            message:"hello"
+        },
+        components: {
+          cpn:{
+            template:'#cpn',
+          }
+        }
+
+    })
+</script>
+</body>
+</html>

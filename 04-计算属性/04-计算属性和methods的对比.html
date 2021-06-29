@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<!-- 视频 https://www.bilibili.com/video/BV15741177Eh?p=25&spm_id_from=pageDriver -->  
+
+<div id="app">
+  <!-- 把firstName 和lastName 展示出来方法-->
+
+  <!-- 1.直接拼接 语法繁琐 -->
+    <h2>{{firstName}} {{lastName}}</h2>
+    <!-- 2.通过methods方法 返回 -->
+    <h2>{{getFullName()}}</h2>
+    <!-- 
+      计算methods方法getFullName调用次数
+      在 getFullName方法中打印 该方法调用了4次
+     -->
+    <h2>{{getFullName()}}</h2>
+    <h2>{{getFullName()}}</h2>
+    <h2>{{getFullName()}}</h2>
+    
+    <!-- 3.使用计算属性computed -->
+    <h2>{{fullName}}</h2>
+    <!-- 
+      计算计算属性方法fullName调用次数
+      在fullName中打印 该方法只调用1次
+      有缓存机制
+    -->
+    <h2>{{fullName}}</h2>
+    <h2>{{fullName}}</h2>
+    <h2>{{fullName}}</h2>
+
+
+</div>    
+<script src="../js/vue.js"></script>    
+<script>
+    const app =new Vue({
+        el:"#app",
+        data:{
+          firstName:'kobe',
+          lastName:'Bryant'
+        },
+        methods: {
+          getFullName:function(){
+            console.log('getFullName')
+            return this.firstName+' '+this.lastName
+          }
+        },
+        computed: {
+          fullName:function(){
+            console.log('fullName')
+            return this.firstName+' '+this.lastName
+          }
+        }
+
+    })
+
+    // 延时调用
+    setTimeout(function(){
+      /*
+        在这里对firstName重新赋值
+        页面渲染 getFullName()函数会再次调用4次
+        计算属性fullName会再次调用1次
+      */
+
+      app.firstName='wang'
+    },1000)
+    
+    
+</script>
+</body>
+</html>

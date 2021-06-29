@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="app">
+    <div v-if="books.length">
+      <table>
+        <thead>
+          <th></th>
+          <th>书籍名称</th>
+          <th>出版日期</th>
+          <th>价格</th>
+          <th>购买数量</th>
+          <th>操作</th>
+        </thead>
+        <tbody>
+          <tr v-for="(item,index) in books" :key="index+item">
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.date}}</td>
+            <!--
+              Vue 过滤器
+              {{item.price | 过滤器方法名}}
+
+              Vue会自动将 要过滤数据(item.price)当做参数传入过滤器方法(showPrice)
+            -->
+
+            <td>{{item.price | showPrice}}</td>
+            <td>
+              <!-- 当书的数量 小于等于1  -按钮不能点击-->
+              <button @click="decrement(index)" :disabled="item.count <= 1">-</button>
+              {{item.count}}
+              <button @click="increment(index)">+</button>
+            </td>
+            <td><button @click="remove(index)">移除</button></td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- 计算属性  过滤器 -->
+      <h2>总价格: {{totalPrice | showPrice}}</h2>
+    </div>
+    <div v-else>
+      <h2>购物车为空</h2>
+    </div>
+  </div>
+
+
+<script src="../js/vue.js"></script>
+<script src="main.js"></script>
+<script src="高阶函数.js"></script>
+</body>
+</html>

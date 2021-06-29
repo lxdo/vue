@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<!-- 视频 https://www.bilibili.com/video/BV15741177Eh?p=15 -->
+<div id="app">
+  <!--
+    {{message}} mustache语法 是把数据渲染到标签 内容中 
+    而无法渲染到标签属性
+
+
+  -->
+  <h2>{{message}}</h2>
+  <!--
+    标签属性无法使用mustache语法 
+    <img src="{{message}}" alt="">
+  -->
+
+  <!--
+    v-bind 把数据渲染到标签的属性中 实现标签的属性可以动态变化
+    语法: v-bind:属性名="数据字段"
+  -->
+  <img  v-bind:src="imgUrl" alt="">
+  <a v-bind:href="aHref">百度一下</a>
+  <!-- 语法糖的写法 (简写) -->
+  <img :src="imgUrl" alt="">
+  <a :href="aHref">百度一下</a>
+
+</div>    
+<script src="../js/vue.js"></script>    
+<script>
+    const app =new Vue({
+        el:"#app",
+        data:{
+            message:"hello",
+            imgUrl:'https://img-blog.csdnimg.cn/20190107012004971.png',
+            aHref:'http://www.baidu.com'
+        },
+
+    })
+</script>
+</body>
+</html>

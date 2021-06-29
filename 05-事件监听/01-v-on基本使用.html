@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<div id="app">
+    <h2>{{count}}</h2>
+    <!-- v-on:事件="事件触发的方法" 如果事件触发的方法没有参数 可以不写() 只写方法名 -->
+    <button v-on:click="increment">+</button>
+    <button v-on:click="decrement">-</button>
+    <!-- 语法糖 @事件=“事件触发的方法”  -->
+    <button @click="increment">+</button>
+    <button @click="decrement">-</button>
+</div>    
+<script src="../js/vue.js"></script>    
+<script>
+    const app =new Vue({
+        el:"#app",
+        data:{
+            count:0
+        },
+        methods: {
+          // 对象字面量 函数增强写法
+          increment(){
+            this.count++
+          },
+          decrement(){
+            this.count--
+          }
+
+        }
+
+    })
+</script>
+</body>
+</html>

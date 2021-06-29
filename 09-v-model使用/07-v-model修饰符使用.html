@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<div id="app">
+  <!--
+    1.修饰符 v-model.lazy 
+    v-model 让input内容和message实时绑定 input变化message就立即变化
+    v-model.lazy 作用:input和message虽然绑定 但input变化message不会立即变化 在input框失去焦点或敲回车键 message才会变化
+  -->
+  <input type="text" v-model.lazy="message">
+  <h2>{{message}}</h2>
+
+  <!-- 
+    2.修饰符 v-model.number
+    默认情况下 v-model绑定的字段(age) 为string类型
+    v-model.number 让v-model绑定的字段(age) 为number类型
+  -->
+  <!-- 这种情况下 在input输入数字 age是string类型 -->
+  <input type="number" v-model="age" >
+  <!-- 这种情况下 在input输入数字 age是number类型 -->
+  <input type="number" v-model.number="age" >
+  <h2>age 值:{{age}} 类型:{{typeof age}}</h2> <!-- 获取变量类型 typeof age -->
+
+  <!-- 
+    3.修饰符 v-model.trim
+    去掉用户输入的左右两边空格
+  -->
+  <input type="text" v-model.trim="name">
+  <h2>您输入的名字: {{name}}</h2>
+</div>    
+<script src="../js/vue.js"></script>    
+<script>
+    const app =new Vue({
+        el:"#app",
+        data:{
+            message:"hello",
+            age:1,
+            name:''
+        },
+
+    })
+</script>
+</body>
+</html>

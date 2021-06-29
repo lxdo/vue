@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-text</title>
+</head>
+<body>
+
+<div id="app">
+    <!--
+        mustache语法显示
+    -->
+<h2>{{message}}</h2>
+
+    <!--
+        v-text显示
+    -->
+    <h2 v-text="message"></h2>
+
+    <!--
+        一般不使用 v-text
+
+         mustache语法可以实现拼接显示
+        而v-text message数据会覆盖 <h2>标签里的 ,jack 不会实现拼接显示
+
+    -->
+    <h2>{{message}},jack</h2>
+    <h2 v-text="message">,jack</h2>
+</div>    
+<script src="../js/vue.js"></script>    
+<script>
+    const app =new Vue({
+        el:"#app",
+        data:{
+            message:"hello"
+        },
+
+    })
+</script>
+</body>
+</html>

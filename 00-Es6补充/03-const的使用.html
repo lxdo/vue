@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+<script>
+  // const定义的变量 不能修改
+  const name = 'why'
+  // name='jack' 报错 常量不能被再次修改
+
+  // const定义变量 必须要赋值
+  // const age 报错 定义未赋值
+  const age =20
+  // 常量定义的变量是对象时，对象的属性名不可改变 可以改变对象内部的属性值
+  const obj ={
+    name:'why',
+    age:18,
+    height:1.88
+  }
+  console.log(obj)
+
+  // obj={n:'zhang',a:'19',h:1.90} 报错 常量定义的变量是对象时 对象的属性名不可改变
+  // 属性值可以改变
+  obj.name='kobe'
+  obj.age=40
+  obj.height=1.87
+
+  console.log(obj)
+</script>  
+</body>
+</html>

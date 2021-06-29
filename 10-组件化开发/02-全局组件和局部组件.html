@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  
+  <div id="app">
+    <!-- 全局组件可以在多个Vue的实例下面使用 -->
+    <global-cpn></global-cpn>
+    <!-- 在Vue实例里注册的是局部组件 只能在该Vue实例下使用 cpn在app实例下注册 -->
+    <cpn></cpn>
+  </div> 
+  
+  <div id="app2">
+    <!-- 全局组件可以在多个Vue的实例下面使用 -->
+    <global-cpn></global-cpn>
+    <!-- 在Vue实例里注册的是局部组件 只能在该Vue实例下使用 cpn在app实例下注册  所以在app2中不可用-->
+    <cpn></cpn>
+  </div>
+<script src="../js/vue.js"></script>    
+<script>
+  // 1.创建组件构造器
+  const cpnc= Vue.extend({
+    template: `
+                <div>
+                  <h2>我是标题</h2>
+                  <p>我是内容，哈哈哈</p>
+                </div>  
+              `
+  })
+  // 2.注册组件 这种注册的是全局组件 意味着可以在多个Vue的实例下面使用
+  Vue.component('global-cpn', cpnc)
+
+    const app =new Vue({
+        el:"#app",
+        data:{
+            message:"hello"
+        },
+        // 注册组件 这种注册的是局部组件 在某个Vue实例下 注册组件 则该组件只能在该Vue的实例下面使用
+        components: {
+          // 组件使用时的标签名 : 组件构造器
+          cpn:cpnc
+        }
+
+    })
+
+    const app2=new Vue({
+      el:'#app2'
+    })
+</script>
+</body>
+</html>

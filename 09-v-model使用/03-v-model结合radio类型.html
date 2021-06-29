@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<div id="app">
+<!-- 
+  在radio中使用v-model 
+  多个radio 都加 v-model="sex"  
+  加了v-model可以不用加name属性 
+  如果radio有一个要默认选中就给sex设置相应默认值
+-->
+    <label for="male">
+      <input type="radio" name="sex" id="male" value="男" v-model="sex">男 <!--两个radio v-model都绑定sex字段 -->
+    </label>
+    <label for="female">
+      <input type="radio" name="sex" id="female" value="女" v-model="sex" >女 <!-- 用v-model 可以省略name属性 -->
+    </label>
+    <h2>选择的性别是:{{sex}}</h2>
+</div>    
+<script src="../js/vue.js"></script>    
+<script>
+    const app =new Vue({
+        el:"#app",
+        data:{
+            sex:'男' // 设置radio默认选中就给sex对应的默认值
+        },
+
+    })
+</script>
+</body>
+</html>
